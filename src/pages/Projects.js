@@ -2,19 +2,35 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Wrapper from "../components/Wrapper";
 import {Link} from "react-router-dom";
-import project1 from "../assets/img/gallery/project1.png";
-import project2 from "../assets/img/gallery/project2.png";
-import project3 from "../assets/img/gallery/project3.png";
-import project4 from "../assets/img/gallery/project4.png";
-import project5 from "../assets/img/gallery/project5.png";
-import project6 from "../assets/img/gallery/project6.png";
 import about from "../assets/img/hero/about.jpg";
-
+import Utils from "../helpers/Utils";
+import {getProjects} from "../store/actions/projects";
+import Pagination from "react-js-pagination";
 
 class Projects extends Component {
   static propTypes = {};
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      activePage: 1,
+    }
+  }
+
+
+  componentDidMount() {
+    this.props.getProjects(this.state.activePage);
+  }
+
+  handlePageChange=async (e)=> {
+    await this.setState({activePage: parseInt(e)});
+    this.props.getProjects(this.state.activePage);
+  };
+
   render() {
+    let {projects,projectCount} = this.props
+    let {activePage} = this.state
+    console.log(projects,projectCount,"123")
     return (
       <Wrapper>
         <main>
@@ -56,130 +72,77 @@ class Projects extends Component {
                       <span className="back-text">Gallery</span>
                     </div>
                   </div>
-                  {/*<div className="col-lg-6">*/}
-                  {/*  <div className="properties__button">*/}
-
-                  {/*    <nav>*/}
-                  {/*      <div className="nav nav-tabs" id="nav-tab" role="tablist">*/}
-                  {/*        <Link className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" to="/#nav-home"*/}
-                  {/*           role="tab" aria-controls="nav-home" aria-selected="false"> Show all </Link>*/}
-                  {/*        <Link className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" to="/#nav-profile"*/}
-                  {/*           role="tab" aria-controls="nav-profile" aria-selected="false"> Intorior</Link>*/}
-                  {/*        <Link className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" to="/#nav-contact"*/}
-                  {/*           role="tab" aria-controls="nav-contact" aria-selected="false">Recent</Link>*/}
-                  {/*        <Link className="nav-item nav-link" id="nav-last-tab" data-toggle="tab" to="/#nav-last"*/}
-                  {/*           role="tab" aria-controls="nav-contact" aria-selected="false">Big building</Link>*/}
-                  {/*        <Link className="nav-item nav-link" id="nav-technology" data-toggle="tab" to="/#nav-techno"*/}
-                  {/*           role="tab" aria-controls="nav-contact" aria-selected="false">Park</Link>*/}
-                  {/*      </div>*/}
-                  {/*    </nav>*/}
-
-                  {/*  </div>*/}
-                  {/*</div>*/}
                 </div>
               </div>
+
               <div className="row">
                 <div className="col-12">
+                  <div className="tab-pane fade active show" id="nav-home" role="tabpanel"
+                       aria-labelledby="nav-home-tab">
+                    <div className="project-caption">
+                      <div className="row">
+                        {projects?projects.map(m=>
+                          <div className="col-lg-4 col-md-6">
+                            <div className="single-project mb-30">
+                              <div className="project-img">
+                                <img src={Utils.fileUrl(m.images)} alt="i" />
+                              </div>
+                              <div className="project-cap">
+                                <h5 className="titleInProjects">
+                                  <Link to={`/project_details/${m.id}`}>{m.title}</Link>
+                                </h5>
+                              </div>
+                            </div>
+                          </div>
+                        ):null}
 
-                  <div className="tab-content active" id="nav-tabContent">
-
-                    <div className="tab-pane fade active show" id="nav-home" role="tabpanel"
-                         aria-labelledby="nav-home-tab">
-                      <div className="project-caption">
-                        <div className="row">
-                          <div className="col-lg-4 col-md-6">
-                            <div className="single-project mb-30">
-                              <div className="project-img">
-                                <img src={project1} alt="" />
-                              </div>
-                              <div className="project-cap">
-                                <Link to="/project_details" className="plus-btn"><i className="ti-plus"></i></Link>
-                                <h4><Link to="/project_details">Floride Chemicals</Link></h4>
-                                <h4><Link to="/project_details">Factory</Link></h4>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6">
-                            <div className="single-project mb-30">
-                              <div className="project-img">
-                                <img src={project2} alt="" />
-                              </div>
-                              <div className="project-cap">
-                                <Link to="/project_details" className="plus-btn"><i className="ti-plus"></i></Link>
-                                <h4><Link to="/project_details">Floride Chemicals</Link></h4>
-                                <h4><Link to="/project_details">Factory</Link></h4>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6">
-                            <div className="single-project mb-30">
-                              <div className="project-img">
-                                <img src={project3} alt="" />
-                              </div>
-                              <div className="project-cap">
-                                <Link to="/project_details" className="plus-btn"><i className="ti-plus"></i></Link>
-                                <h4><Link to="/project_details">Floride Chemicals</Link></h4>
-                                <h4><Link to="/project_details">Factory</Link></h4>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6">
-                            <div className="single-project mb-30">
-                              <div className="project-img">
-                                <img src={project4} alt="" />
-                              </div>
-                              <div className="project-cap">
-                                <Link to="/project_details" className="plus-btn"><i className="ti-plus"></i></Link>
-                                <h4><Link to="/project_details">Floride Chemicals</Link></h4>
-                                <h4><Link to="/project_details">Factory</Link></h4>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6">
-                            <div className="single-project mb-30">
-                              <div className="project-img">
-                                <img src={project5} alt="" />
-                              </div>
-                              <div className="project-cap">
-                                <Link to="/project_details" className="plus-btn"><i className="ti-plus"></i></Link>
-                                <h4><Link to="/project_details">Floride Chemicals</Link></h4>
-                                <h4><Link to="/project_details">Factory</Link></h4>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6">
-                            <div className="single-project mb-30">
-                              <div className="project-img">
-                                <img src={project6} alt="" />
-                              </div>
-                              <div className="project-cap">
-                                <Link to="/project_details" className="plus-btn"><i className="ti-plus"></i></Link>
-                                <h4><Link to="/project_details">Floride Chemicals</Link></h4>
-                                <h4><Link to="/project_details">Factory</Link></h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        {/*<Pagination*/}
+                        {/*  activePage={activePage}*/}
+                        {/*  totalItemsCount={projectCount?projectCount:10}*/}
+                        {/*  onChange={this.handlePageChange}*/}
+                        {/*/>*/}
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
+
+              {/*<Pagination*/}
+              {/*  activePage={activePage}*/}
+              {/*  totalItemsCount={projectCount?projectCount:10}*/}
+              {/*  onChange={this.handlePageChange}*/}
+              {/*/>*/}
+              <nav aria-label="navigation " className="navigationPagination">
+                <ul className="pagination mt-50 mb-70">
+                  <li className="page-item">
+                    <Pagination
+                        itemClass="page-item"
+                        linkClass="page-link"
+                      activePage={activePage}
+                      totalItemsCount={projectCount?projectCount:10}
+                      onChange={this.handlePageChange}
+                    />
+                  </li>
+                </ul>
+              </nav>
             </div>
+
           </section>
-
         </main>
-
       </Wrapper>
     )
   }
 }
 
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  projects:state.projects.projects,
+  projectCount:state.projects.projectCount
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getProjects
+};
 
 const Container = connect(
   mapStateToProps,

@@ -9,8 +9,8 @@ const api = axios.create({
 class Api {
   static url = API_URL;
 
-  static getProjects() {
-    return api.get(`/projects/${1}`);
+  static getProjects(activePage) {
+    return api.get(`/projects/${activePage}`);
   }
   static getProjectById(id) {
     return api.get(`/projects/projectById/${id}`);

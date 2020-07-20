@@ -15,9 +15,12 @@ export default function* watcher() {
   yield takeLatest(GET_PROJECT_BY_ID_REQUEST, handleGetProjectById)
 }
 
-function* handleGetProjects() {
+function* handleGetProjects(action) {
   try {
-    const projects = yield call(Api.getProjects)
+    // const projects = yield call(Api.getProjects)
+    const {activePage} = action.payload;
+    console.log(action.payload)
+    const projects = yield call(Api.getProjects,activePage)
     yield put({
       type: GET_PROJECT_SUCCESS,
       payload: projects
@@ -32,7 +35,7 @@ function* handleGetProjects() {
 }
 function* handleGetProjectById(action) {
   try {
-    const{id} = action.payload
+    const {id} = action.payload
     const projectById = yield call(Api.getProjectById,id)
     yield put({
       type: GET_PROJECT_BY_ID_SUCCESS,

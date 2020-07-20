@@ -21,10 +21,7 @@ class Project_details extends Component {
   render() {
     // console.log(this.props.projectById,"projectById")
     let { projectById } = this.props
-    // console.log(projectById)
-    // if (projectById){
-    //   console.log(projectById.images,typeof(projectById.images),JSON.parse(projectById.images))
-    // }
+    console.log(projectById)
     return (
       <Wrapper>
         <main>
@@ -36,11 +33,11 @@ class Project_details extends Component {
                 <div className="row">
                   <div className="col-xl-12">
                     <div className="hero-cap pt-100">
-                      <h2>projects Details</h2>
+                      <h2>Детали Проекта</h2>
                       <nav aria-label="breadcrumb ">
                         <ol className="breadcrumb">
-                          <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                          <li className="breadcrumb-item"><Link to="#">projects Details</Link></li>
+                          <li className="breadcrumb-item"><Link to="/">Главная</Link></li>
+                          <li className="breadcrumb-item"><Link to="#">детали проекта</Link></li>
                         </ol>
                       </nav>
                     </div>
@@ -56,37 +53,21 @@ class Project_details extends Component {
                 <div className="col-12">
                   <div className="single-services section-padding2">
 
+                    <div className="details-caption titleProjectId">
+                      <h3>{projectById?projectById.title:null}</h3>
+                    </div>
                     <Carousel
-                      className="details-img mb-40"
-                      wrapAround
+                      autoplay
+                      wrapAround={1}
+                      pauseOnHover={1}
+                      className="carousel"
                     >
-                      {/*{projectById? JSON.parse(projectById.images).map((m)=>(<img src={UtilsFromCarousel.fileUrl(m)} alt="i" key={m} />)):null}*/}
-                      {projectById ? JSON.parse(projectById.images).map((m) => (<img src={UtilsFromCarousel.fileUrl(m)} alt="i" key={m} />)) : null}
+                      {projectById && projectById.images? JSON.parse(projectById.images).map((m)=>(
+                        <img key={m.id} src={UtilsFromCarousel.fileUrl(m)} alt="m"/>
+                      )):null}
                     </Carousel>
-                    {/*{product ? JSON.parse(product.images).map((m) => (<img src={UtilsFromCarousel.fileUrl(m)} alt="i" key={m} />)) : null}*/}
-
                     <div className="details-caption">
-                      <p>Mollit anim laborum.Dvcuis aute iruxvfg dhjkolohr in re voluptate velit esscillumlore eu quife
-                        nrulla parihatur. Excghcepteur sfwsignjnt occa cupidatat non aute iruxvfg dhjinulpadeserunt
-                        mollitemnth incididbnt ut;o5tu layjobore mofllit anim.Mollit anim laborum.Dvcuis aute
-                        iruxvfg.</p>
-
-                      <p className="mb-50">Mollit anim laborum.Dvcuis aute iruxvfg dhjkolohr in re voluptate velit
-                        esscillumlore eu quife nrulla parihatur. Excghcepteur sfwsignjnt occa cupidatat non aute iruxvfg
-                        dhjinulpadeserunt mollitemnth incididbnt ut;o5tu layjobore mofllit anim.Mollit anim
-                        laborum.Dvcuis aute iruxvfg.</p>
-
-                      <h3>Our main goal</h3>
-                      <p className="mb-50">Mollit anim laborum.Dvcuis aute iruxvfg dhjkolohr in re voluptate velit
-                        esscillumlore eu quife nrulla parihatur. Excghcepteur sfwsignjnt occa cupidatat non aute iruxvfg
-                        dhjinulpadeserunt mollitemnth incididbnt ut;o5tu layjobore mofllit anim.Mollit anim
-                        laborum.Dvcuis aute iruxvfg.</p>
-
-                      <h3>Take a look to our challenges</h3>
-                      <p>Mollit anim laborum.Dvcuis aute iruxvfg dhjkolohr in re voluptate velit esscillumlore eu quife
-                        nrulla parihatur. Excghcepteur sfwsignjnt occa cupidatat non aute iruxvfg dhjinulpadeserunt
-                        mollitemnth incididbnt ut;o5tu layjobore mofllit anim.Mollit anim laborum.Dvcuis aute
-                        iruxvfg.</p>
+                      <p>{projectById?projectById.desc:null}</p>
                     </div>
                   </div>
                 </div>
@@ -94,7 +75,6 @@ class Project_details extends Component {
             </div>
           </div>
         </main>
-
       </Wrapper>
     )
   }

@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Wrapper from "../components/Wrapper";
 import {Link} from "react-router-dom";
-import safe_in from "../assets/img/gallery/safe_in.png"
-import team1 from "../assets/img/team/team1.png"
-import team2 from "../assets/img/team/team2.png"
-import team3 from "../assets/img/team/team3.png"
 import aboutImg from "../assets/img/hero/about.jpg"
 import {getAbout} from "../store/actions/about";
 import Utils from "../helpers/Utils";
+import passport from "../assets/img/about/passport.png"
+import master from "../assets/img/about/master1.png"
+import magnifier from "../assets/img/about/magnifying.png"
+import contract from "../assets/img/about/contract.png"
 
 
 class About extends Component {
@@ -20,7 +20,6 @@ class About extends Component {
   }
 
   render() {
-    console.log(this.props.about)
     let {about} = this.props
     return (
       <Wrapper>
@@ -86,46 +85,44 @@ class About extends Component {
 
                   <div className="section-tittle section-tittle5 mb-50">
                     <div className="front-text">
-                      <h2 className="">Our team</h2>
+                      <h3 className="aboutContentTitle">Зачем сотрудничать с нами?</h3>
                     </div>
-                    <span className="back-text">exparts</span>
+
                   </div>
                 </div>
               </div>
-              <div className="row">
-
-                <div className="col-xl-4 col-lg-4 col-md-6 col-sm-">
-                  <div className="single-team mb-30">
-                    <div className="team-img">
-                      <img src={team1} alt="" />
-                    </div>
-                    <div className="team-caption">
-                      <span>UX Designer</span>
-                      <h3>Ethan Welch</h3>
-                    </div>
-                  </div>
+              <div className="aboutContent">
+                <div className="aboutContentItem">
+                  <img className="aboutContentItemImg"  src={passport} alt=""/>
+                  <p className="aboutContentItemDesc">
+                    Все рабочие граждане
+                    <br/>
+                    Российской Федерации
+                  </p>
                 </div>
-                <div className="col-xl-4 col-lg-4 col-md-6 col-sm-">
-                  <div className="single-team mb-30">
-                    <div className="team-img">
-                      <img src={team2} alt="" />
-                    </div>
-                    <div className="team-caption">
-                      <span>UX Designer</span>
-                      <h3>Ethan Welch</h3>
-                    </div>
-                  </div>
+                <div className="aboutContentItem">
+                  <img className="aboutContentItemImg"  src={magnifier} alt=""/>
+                  <p className="aboutContentItemDesc">
+                    Отсутствие скрытых
+                    <br/>
+                    платежей
+                  </p>
                 </div>
-                <div className="col-xl-4 col-lg-4 col-md-6 col-sm-">
-                  <div className="single-team mb-30">
-                    <div className="team-img">
-                      <img src={team3} alt="" />
-                    </div>
-                    <div className="team-caption">
-                      <span>UX Designer</span>
-                      <h3>Ethan Welch</h3>
-                    </div>
-                  </div>
+                <div className="aboutContentItem">
+                  <img className="aboutContentItemImg"  src={master} alt=""/>
+                  <p className="aboutContentItemDesc">
+                    Бесплатный выезд
+                    <br/>
+                    замерщика
+                  </p>
+                </div>
+                <div className="aboutContentItem">
+                  <img className="aboutContentItemImg" src={contract} alt=""/>
+                  <p className="aboutContentItemDesc">
+                    Работаем официально
+                    <br/>
+                    по договору
+                  </p>
                 </div>
               </div>
             </div>

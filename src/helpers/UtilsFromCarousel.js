@@ -7,7 +7,7 @@ class Utils {
 
     if (!/https?:\/\//.test(url) && !url.toString().includes(';base64,')) {
       try {
-        url = JSON.parse(url);
+        // url = JSON.parse(url);
       } catch (e) {
         //
       }

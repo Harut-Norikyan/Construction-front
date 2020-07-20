@@ -23,10 +23,12 @@ export default function reducer(state = initialstate, action) {
     }
     case GET_PROJECT_SUCCESS: {
       const {projects} = action.payload.data
+      const {projectCount} = action.payload.data
       return {
         ...state,
         requestStatus: "ok",
-        projects:projects
+        projects:projects,
+        projectCount
       }
     }
     case GET_PROJECT_FAIL: {

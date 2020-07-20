@@ -26,27 +26,37 @@ import Wrapper from "../components/Wrapper";
 import {getProjects} from "../store/actions/projects";
 import Utils from "../helpers/Utils";
 import {getAbout} from "../store/actions/about";
+import passport from "../assets/img/about/passport.png";
+import magnifier from "../assets/img/about/magnifying.png";
+import master from "../assets/img/about/master1.png";
+import contract from "../assets/img/about/contract.png";
 
 
 
 class Home extends Component {
   static propTypes = {};
+  constructor(props) {
+    super(props);
+    this.state={
+      activePage: 1
+    }
+  }
 
   componentDidMount() {
-    this.props.getProjects();
+    this.props.getProjects(this.state.activePage);
     this.props.getAbout()
   }
 
+
+
   render() {
-    const {projects,about,state} = this.props
+    const {projects,about} = this.props
     return (
       <Wrapper>
-
       <main>
         <div className="slider-area ">
           <div className="slider-active">
             <div className="single-slider  hero-overly slider-height d-flex align-items-center"
-                 // data-background="assets/img/hero/h1_hero.jpg">
                  style={{ backgroundImage: `url(${h1_hero})` }}
             >
               <div className="container">
@@ -135,34 +145,88 @@ class Home extends Component {
           </div>
         </div>
 
+        <div className="container">
+          <section className="support-company-area fix pt-10">
+            <div className="support-wrapper align-items-end">
+              <div className="left-content">
 
-        <section className="support-company-area fix pt-10">
-          <div className="support-wrapper align-items-end">
-            <div className="left-content">
-
-              <div className="section-tittle section-tittle2 mb-55">
-                <div className="front-text">
-                  <h2 style={{fontSize :70}}>{about?about.title:null}</h2>
+                <div className="section-tittle section-tittle2 mb-55">
+                  <div className="front-text">
+                    <h2 style={{fontSize :70}}>{about?about.title:null}</h2>
+                  </div>
+                </div>
+                <div className="support-caption">
+                  <p>{about?about.desc:null}</p>
+                  <Link to="/about" className="btn red-btn2">Узнать больше</Link>
                 </div>
               </div>
-              <div className="support-caption">
-                <p>{about?about.desc:null}</p>
-                <Link to="/about" className="btn red-btn2">Узнать больше</Link>
+              <div className="right-content">
+
+                <div className="right-img">
+                  <img src={safe_in} alt="" />
+                </div>
+                <div className="support-img-cap text-center">
+                  <span>1994</span>
+                  <p>Since</p>
+                </div>
               </div>
             </div>
-            <div className="right-content">
+          </section>
+        </div>
 
-              <div className="right-img">
-                <img src={safe_in} alt="" />
+
+        <div className="line" />
+        <div className="team-area section-padding30">
+          <div className="container">
+            <div className="row">
+              <div className="col-xl-12">
+
+                <div className="section-tittle section-tittle5 mb-50">
+                  <div className="front-text">
+                    <h3 className="aboutContentTitle">Зачем сотрудничать с нами?</h3>
+                  </div>
+
+                </div>
               </div>
-              <div className="support-img-cap text-center">
-                <span>1994</span>
-                <p>Since</p>
+            </div>
+            <div className="aboutContent">
+              <div className="aboutContentItem">
+                <img className="aboutContentItemImg"  src={passport} alt=""/>
+                <p className="aboutContentItemDesc">
+                  Все рабочие граждане
+                  <br/>
+                  Российской Федерации
+                </p>
+              </div>
+              <div className="aboutContentItem">
+                <img className="aboutContentItemImg"  src={magnifier} alt=""/>
+                <p className="aboutContentItemDesc">
+                  Отсутствие скрытых
+                  <br/>
+                  платежей
+                </p>
+              </div>
+              <div className="aboutContentItem">
+                <img className="aboutContentItemImg"  src={master} alt=""/>
+                <p className="aboutContentItemDesc">
+                  Бесплатный выезд
+                  <br/>
+                  замерщика
+                </p>
+              </div>
+              <div className="aboutContentItem">
+                <img className="aboutContentItemImg" src={contract} alt=""/>
+                <p className="aboutContentItemDesc">
+                  Работаем официально
+                  <br/>
+                  по договору
+                </p>
               </div>
             </div>
           </div>
-        </section>
+        </div>
 
+        <div className="line" />
 
         <section className="project-area  section-padding30">
           <div className="container">
@@ -182,9 +246,6 @@ class Home extends Component {
             </div>
             <div className="row">
               <div className="col-12">
-
-            {/*    <div className="tab-content active" id="nav-tabContent">*/}
-
                   <div className="tab-pane fade active show" id="nav-home" role="tabpanel"
                        aria-labelledby="nav-home-tab">
                     <div className="project-caption">
@@ -196,7 +257,9 @@ class Home extends Component {
                                 <img src={Utils.fileUrl(m.images)} alt="i" />
                               </div>
                               <div className="project-cap">
-                                <h5><Link to={`/project_details/${m.id}`}>{m.title}</Link></h5>
+                                <h5 className="titleInProjects">
+                                  <Link to={`/project_details/${m.id}`}>{m.title}</Link>
+                                </h5>
                               </div>
                             </div>
                           </div>
@@ -208,17 +271,6 @@ class Home extends Component {
 
               </div>
             </div>
-
-
-            {/*<div className="containerCarousel">*/}
-            {/*  <Carousel*/}
-            {/*    // autoplay*/}
-            {/*    wrapAround*/}
-            {/*  >*/}
-            {/*    /!* eslint-disable-next-line react/prop-types *!/*/}
-            {/*    {product ? JSON.parse(product.images).map((m) => (<img src={UtilsFromCarousel.fileUrl(m)} alt="i" key={m} />)) : null}*/}
-            {/*  </Carousel>*/}
-            {/*</div>*/}
 
           </div>
         </section>
@@ -328,13 +380,6 @@ class Home extends Component {
 
                     <div className="testimonial-caption ">
                       <div className="testimonial-top-cap">
-
-                        {/*<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86px"*/}
-                        {/*     height="63px">*/}
-                        {/*  <path fill-rule="evenodd" stroke-width="1px" stroke="rgb(255, 95, 19)" fill-opacity="0"*/}
-                        {/*        fill="rgb(0, 0, 0)"*/}
-                        {/*        d="M82.623,59.861 L48.661,59.861 L48.661,25.988 L59.982,3.406 L76.963,3.406 L65.642,25.988 L82.623,25.988 L82.623,59.861 ZM3.377,25.988 L14.698,3.406 L31.679,3.406 L20.358,25.988 L37.340,25.988 L37.340,59.861 L3.377,59.861 L3.377,25.988 Z"/>*/}
-                        {/*</svg>*/}
                         <p>Mollit anim laborum.Dvcuis aute iruxvfg dhjkolohr in re voluptate velit esscillumlore eu
                           quife nrulla parihatur. Excghcepteur sfwsignjnt occa cupidatat non aute iruxvfg
                           dhjinulpadeserunt mollitemnth incididbnt ut;o5tu layjobore mofllit anim. Mollit anim
@@ -356,12 +401,6 @@ class Home extends Component {
                     <div className="testimonial-caption ">
                       <div className="testimonial-top-cap">
 
-                        {/*<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86px"*/}
-                        {/*     height="63px">*/}
-                        {/*  <path fill-rule="evenodd" stroke-width="1px" stroke="rgb(255, 95, 19)" fill-opacity="0"*/}
-                        {/*        fill="rgb(0, 0, 0)"*/}
-                        {/*        d="M82.623,59.861 L48.661,59.861 L48.661,25.988 L59.982,3.406 L76.963,3.406 L65.642,25.988 L82.623,25.988 L82.623,59.861 ZM3.377,25.988 L14.698,3.406 L31.679,3.406 L20.358,25.988 L37.340,25.988 L37.340,59.861 L3.377,59.861 L3.377,25.988 Z"/>*/}
-                        {/*</svg>*/}
                         <p>Mollit anim laborum.Dvcuis aute iruxvfg dhjkolohr in re voluptate velit esscillumlore eu
                           quife nrulla parihatur. Excghcepteur sfwsignjnt occa cupidatat non aute iruxvfg
                           dhjinulpadeserunt mollitemnth incididbnt ut;o5tu layjobore mofllit anim. Mollit anim
